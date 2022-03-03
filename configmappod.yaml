@@ -1,0 +1,32 @@
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+  labels:
+    name: myapp
+spec:
+  containers:
+    - name: myapp
+      image: nginx
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      volumeMounts:
+        - name:  configname
+          mountPath:  /etc/config
+  volumes:
+    - name:  configname
+      mountPath:  Path to mount
+    
+      env:
+        - name: LEVEL_KEY
+          valueFrom:
+            configMapkeyRef:
+              name: Special_config
+              key: special.how
+    
+      ports:
+        - containerPort: 80
+  restartPolicy: Never

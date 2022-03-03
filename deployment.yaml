@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  label:
+    app: nginx
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+  spec:
+    containers:
+    - name: myapp
+      image: nginx:latest
+      ports:
+      - name:  Port Name
+        port:  80
+        protocol: TCP  
